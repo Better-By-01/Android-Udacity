@@ -36,20 +36,25 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         if (quantity>0) {
             int price = quantity*5;
-            String priceMessage = "Total: $" + price + "\nThank You !!!";
-            displayMessage(priceMessage);
+            displayMessage(createOrderSummary(price));
         }
         else
             displayPrice(quantity);
     }
 
+    public String createOrderSummary(int price)   {
+        return "Name: Ashutosh Patel\n" + "Quantity: " + quantity + "\nTotal: $" +
+                price + "\nThank You !";
+    }
+
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 
     /**
      * This method displays the given quantity value on the screen.
+     * @param number is used here for the no. of cups ordered.
      */
     private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given price on the screen.
      */
     private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 }
